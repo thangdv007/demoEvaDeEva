@@ -5,20 +5,14 @@ import logo from '~/assets/Images/Logo';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import productCollection from '~/assets/Images/ProductCollection';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
 function Header() {
-    const [currentUser, setCurrentUser] = useState(null);
-
-    // useEffect(() => {
-    //     const fetchApi = async () => {
-    //         const result = await loginService.setCurrentUser;
-
-    //         setCurrentUser(result);
-    //     };
-    //     fetchApi();
-    // }, []);
+    // Lấy thông tin người dùng từ Redux store
+    const currentUser = useSelector((state) => state.auth.currentUser);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const navItems = [
         {
@@ -88,7 +82,16 @@ function Header() {
         },
     ];
 
-    const [isScrolled, setIsScrolled] = useState(false);
+    const handleScroll = () => {
+        const scrollTop = window.pageYOffset;
+
+        // Kiểm tra vị trí cuộn và cập nhật trạng thái
+        if (scrollTop > 0) {
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+    };
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -96,17 +99,6 @@ function Header() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    const handleScroll = () => {
-        const scrollTop = window.pageYOffset;
-
-        // Kiểm tra vị trí cuộn và cập nhật trạng thái
-        if (scrollTop > 0 && !isScrolled) {
-            setIsScrolled(true);
-        } else if (scrollTop === 0 && isScrolled) {
-            setIsScrolled(false);
-        }
-    };
 
     const renderNavItem = (item, index) => {
         const hasChildren = item.children?.length > 0;
@@ -151,7 +143,12 @@ function Header() {
     };
 
     return (
-        <header id="header" className={cx('main-header', 'container-fluid')}>
+        <header
+            id="header"
+            className={
+                isScrolled ? cx('main-header', 'container-fluid', 'scrolled') : cx('main-header', 'container-fluid')
+            }
+        >
             <div className={cx('nav-lap', 'row')}>
                 <div className={cx('padding-lr-0', 'col-sm-12', 'col-md-3', 'col-lg-2')}>
                     <div>
@@ -173,22 +170,22 @@ function Header() {
                     <div className={cx('right-header')}>
                         <div className={cx('cart')}>
                             <span>
-                                <Link to="/" title="Giỏ hàng">
+                                <Link to="/cart" title="Giỏ hàng">
                                     <img src={logo.cart} alt="Giỏ hàng" />
                                     <span className={cx('count-cart')}>0</span>
                                 </Link>
                             </span>
                         </div>
                         <div className={cx('account')}>
-                            {currentUser ? (
+                            {!currentUser || currentUser.length === 0 ? (
                                 <>
-                                    <Link to="/account" title="Tài khoản">
+                                    <Link to="/login" title="Tài khoản">
                                         <img src={logo.account} alt="Tài khoản" />
                                     </Link>
                                 </>
                             ) : (
                                 <>
-                                    <Link to="/login" title="Tài khoản">
+                                    <Link to="/account" title="Tài khoản">
                                         <img src={logo.account} alt="Tài khoản" />
                                     </Link>
                                 </>

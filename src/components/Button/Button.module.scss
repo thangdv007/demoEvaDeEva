@@ -1,13 +1,12 @@
 .wrapper {
-    display: inline-flex;
+    //display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 100px;
-    padding: 9px 16px;
     border-radius: 4px;
     font-size: 1.6rem;
     font-weight: 700;
-    font-family: var(--font-family);
+    //font-family: var(--font-family);
     cursor: pointer;
     background-color: var(--white);
     border: 1px solid transparent;
@@ -21,11 +20,6 @@
         pointer-events: none;
         opacity: 0.5;
     }
-}
-
-.icon + .title,
-.title + .icon {
-    margin-left: 8px;
 }
 
 .icon {
@@ -72,11 +66,20 @@
         text-decoration: underline;
     }
 }
+.pay {
+    border: 1px solid #f1f1f1;
+    display: inline-block;
+    margin: 20px 0 0 20px;
+    font-size: 15px;
+    transition: opacity 150ms linear, color 150ms linear, background 150ms linear;
+    outline: none;
+}
 
 // Button sizes
 .small {
-    min-width: 88px;
+    min-width: 30px;
     padding: 4px 16px;
+    border-radius: 0%;
 }
 
 .large {

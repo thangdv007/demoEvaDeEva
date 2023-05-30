@@ -1,20 +1,19 @@
 import axios from 'axios';
 
+//thiết lập cấu hình mặc định cho các yêu cầu http request
 const httpRequest = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
+    headers: {
+        'content-type': 'application/json',
+    },
 });
 
-export const get = async (path, options = {}) => {
-    const response = await httpRequest.get(path, options);
-    return response.data;
-};
-export const post = async (path, options = {}) => {
-    const response = await httpRequest.post(path, options);
-    return response.data;
-};
-export const put = async (path, options = {}) => {
-    const response = await httpRequest.put(path, options);
-    return response.data;
-};
+// httpRequest.interceptors.request.use((config) => {
+//     const token = localStorage.getItem('jwtToken');
+//     if (token) {
+//         config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+// });
 
 export default httpRequest;
