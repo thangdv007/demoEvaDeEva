@@ -21,9 +21,9 @@ function BannerHomePage() {
                 <div className="col-lg-11 mx-auto">
                     <div className="banner">
                         <div className="row d-flex justify-content-center flex-wrap">
-                            {banner.map((banner) => (
-                                <div className="col-lg-4 col-sm-12 banner-item">
-                                    <img src={banner.img} className="banner-image" />
+                            {banner.map((item) => (
+                                <div className="col-lg-4 col-sm-12 banner-item" key={item.id}>
+                                    <img src={item.img} className="banner-image" />
                                 </div>
                             ))}
                             {/* <div className="col-lg-4 col-sm-12 banner-item">

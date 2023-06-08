@@ -5,6 +5,8 @@ import product from '~/assets/Images/Products';
 import Button from '~/components/Button/Button';
 import { useEffect, useState } from 'react';
 import Breadcrumb from '~/components/Breadcrumb';
+import { useDispatch } from 'react-redux';
+import { updateCartCount } from '~/redux/countCart';
 
 function Cart() {
     const [cartItems, setCartItems] = useState([
@@ -27,6 +29,8 @@ function Cart() {
             total: '30',
         },
     ]);
+    const dispatch = useDispatch();
+    const [totalQuantity, setTotalQuantity] = useState(0);
 
     useEffect(() => {
         updatedToltalPrice();
@@ -36,6 +40,14 @@ function Cart() {
         const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
         setTotalPrice(totalPrice);
     };
+    useEffect(() => {
+        const updateTotalQuantity = () => {
+            const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+            setTotalQuantity(totalQuantity);
+            return totalQuantity;
+        };
+        dispatch(updateCartCount(updateTotalQuantity()));
+    }, [cartItems, dispatch]);
 
     //xóa sản phẩm khỏi giỏ hàng
     const handleRemoveItem = (itemId) => {

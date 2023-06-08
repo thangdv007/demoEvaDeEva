@@ -1,10 +1,7 @@
-import classNames from 'classnames/bind';
-import styles from '../../Footer.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-
-const cx = classNames.bind(styles);
+import { FloatingLabel, Form } from 'react-bootstrap';
 
 function SectionFooter() {
     const footerItems = [
@@ -77,13 +74,13 @@ function SectionFooter() {
     ];
 
     return (
-        <footer id="sectionFooter" className={cx('clear-fix', 'sectionFooter')}>
-            <div className={cx('padding-rl-40')}>
-                <div className={cx('innerFooter')}>
-                    <div className={cx('row')}>
+        <footer id="sectionFooter" className="clear-fix sectionFooter">
+            <div className="padding-rl-40 ">
+                <div className="innerFooter">
+                    <div className="row">
                         {footerItems.map((menuItem) => (
-                            <div className={cx('col-footer-two', 'col-sm-12')} key={menuItem.id}>
-                                <div className={cx('innerMenuFooter')}>
+                            <div className="col-footer-two col-sm-12" key={menuItem.id}>
+                                <div className="innerMenuFooter">
                                     <h4
                                         data-bs-toggle="collapse"
                                         role="button"
@@ -94,7 +91,7 @@ function SectionFooter() {
                                         {menuItem.title}
                                         <i />
                                     </h4>
-                                    <ul className={cx('collapse', 'show')} id={menuItem.id}>
+                                    <ul className="collapse show" id={menuItem.id}>
                                         {menuItem.submenuItems.map((submenuItem, index) => (
                                             <li key={index}>
                                                 <Link to={submenuItem.to} title={submenuItem.title}>
@@ -106,39 +103,28 @@ function SectionFooter() {
                                 </div>
                             </div>
                         ))}
-                        <div className={cx('col-footer-three', 'col-sm-12')}>
-                            <div className={cx('innerMenuFooter')}>
-                                <div className={cx('footer-signup')}>
-                                    <div className={cx('footer-signup-inner')}>
-                                        <h4 className={cx('noClick')}>ĐĂNG KÝ NHẬN TIN TỨC VÀ ƯU ĐÃI CỦA EDE</h4>
-                                        <div className={cx('contentSubscribe')}>
+                        <div className="col-footer-three col-sm-12">
+                            <div className="innerMenuFooter">
+                                <div className="footer-signup">
+                                    <div className="footer-signup-inner">
+                                        <h4 className="noClick">ĐĂNG KÝ NHẬN TIN TỨC VÀ ƯU ĐÃI CỦA EDE</h4>
+                                        <div className="contentSubscribe">
                                             <p>
                                                 Bằng cách đăng ký, bạn đồng ý với <a href="#">chính sách bảo mật</a> của
                                                 chúng tôi.
                                             </p>
                                             <form acceptCharset="UTF-8" action="" id="" method="post">
-                                                <div className={cx('newsletter-form')}>
-                                                    <input
-                                                        required=""
-                                                        type="email"
-                                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                                                        name="email"
-                                                        id="emailSubscribe"
-                                                        className={cx(
-                                                            'emailSubscribe',
-                                                            'newsletter-input',
-                                                            'form-control',
-                                                            'input-lg',
-                                                        )}
-                                                    />
-                                                    <label htmlFor="email" className={cx('f-input')}>
-                                                        Nhập email của bạn
-                                                    </label>
-                                                    <button className={cx('btnNewsletter')} type="submit">
+                                                <div className="newsletter-form">
+                                                    <FloatingLabel
+                                                        controlId="floatingInput"
+                                                        label="Nhập email của bạn "
+                                                    >
+                                                        <Form.Control type="email" placeholder="name@example.com" />
+                                                    </FloatingLabel>
+                                                    <button className="btnNewsletter" type="submit">
                                                         <FontAwesomeIcon icon={faChevronRight} />
                                                     </button>
                                                 </div>
-                                                <input id="" name="" type="hidden" />
                                             </form>
                                         </div>
                                     </div>

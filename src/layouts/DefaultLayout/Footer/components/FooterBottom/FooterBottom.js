@@ -1,14 +1,11 @@
-import classNames from 'classnames/bind';
-import styles from '../../Footer.module.scss';
 import logo from '~/assets/Images/Logo';
-
-const cx = classNames.bind(styles);
+import Button from '~/components/Button/Button';
 
 function FooterBottom() {
     return (
-        <section id="footerBottom" className={cx('footerBottom')}>
-            <div className={cx('padding-rl-40')}>
-                <div className={cx('infoFooterBottom')}>
+        <section id="footerBottom" className="footerBottom">
+            <div className="padding-rl-40">
+                <div className="infoFooterBottom">
                     <span>
                         <b>CÔNG TY TNHH MỸ PHỤC</b>
                         <br />
@@ -18,12 +15,12 @@ function FooterBottom() {
                         Đống Đa, Thành phố Hà Nội, Việt Nam
                     </span>
                 </div>
-                <div className={cx('logo-bct')}>
-                    <a href="#">
+                <div className="logo-bct">
+                    <Button to="/">
                         <img src={logo.logo_bct} alt="Logo bộ công thương" />
-                    </a>
+                    </Button>
                 </div>
-                <div className={cx('coppyRight')}>
+                <div className="coppyRight">
                     <span>© 2021 Eva de Eva.</span>
                 </div>
             </div>

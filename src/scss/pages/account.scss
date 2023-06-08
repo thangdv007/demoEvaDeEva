@@ -1,0 +1,90 @@
+.title-infor-account {
+    padding: 100px 15px;
+    border-bottom: 1px solid #ededed;
+    margin-bottom: 60px;
+    h1 {
+        font-size: 44px;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        &:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            margin: 50px auto 0;
+            background: #000;
+        }
+    }
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.acc-title {
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+}
+.list-acc {
+    ul {
+        list-style-type: square;
+        font-size: 20px !important;
+        li {
+            a {
+                display: block;
+                position: relative;
+                padding: 5px 0px;
+            }
+        }
+    }
+}
+.customer-sidebar {
+    p {
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+    .title-detail {
+        font-size: 15px;
+    }
+}
+.title-detail {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 8px;
+}
+.customer-orders {
+    background: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    .table-bg {
+        background: #fff;
+        padding: 10px;
+    }
+}
+.table {
+    thead {
+        height: 30px;
+        padding-bottom: 15px;
+    }
+    th {
+        vertical-align: middle;
+    }
+    tbody {
+        th {
+            font-size: 13px;
+            border-style: none;
+            font-weight: 500;
+        }
+    }
+}

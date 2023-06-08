@@ -1,15 +1,10 @@
-import classNames from 'classnames/bind';
-import clsx from 'clsx';
 import { default as React, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Breadcrumb from '~/components/Breadcrumb';
 import { login, setCurrentUser } from '~/redux/userSlice';
-import styles from '../LoginSignup.module.scss';
 
-const cx = classNames.bind(styles);
-
-function Login(props) {
+function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -71,30 +66,30 @@ function Login(props) {
 
     return (
         <>
-            <div className={cx('clear-fix')} />
+            <div className="clear-fix" />
             <main>
-                <div className={cx('layout-account')}>
+                <div className="layout-account">
                     <Breadcrumb pageName="account" currentAcc="login" />
-                    <div className={cx('container')}>
-                        <div className={cx('row')}>
-                            <div className={cx('left-page', 'col-md-6', 'col-lg-6')}>
-                                <div className={cx('left', 'clearfix')}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="left-page col-md-6 col-lg-6">
+                                <div className="left clearfix">
                                     <h1>Đăng nhập</h1>
                                 </div>
                             </div>
-                            <div className={cx('col-sm-12', 'col-md-6', 'col-lg-6', 'right-page')}>
+                            <div className="col-sm-12 col-md-6 col-lg-6 right-page">
                                 <div id="user-login">
                                     {showPasswordRecovery ? (
                                         <>
                                             <div style={{ paddingTop: 15 }} id="wrap-social-login-plus"></div>
-                                            <div id="recover-password" className={cx('user-box')}>
-                                                <div className={cx('account-type')}>
+                                            <div id="recover-password" className="user-box">
+                                                <div className="account-type">
                                                     <h2>Phục hồi mật khẩu</h2>
                                                 </div>
                                                 <form acceptCharset="UTF-8" onSubmit={handleForgotPass}>
-                                                    <div className={cx('range-form', 'clearfix')}>
-                                                        <label htmlFor="email" className={cx('icon-field')}>
-                                                            <i className={cx('icon-login', 'icon-envelope')} />
+                                                    <div className="range-form clearfix">
+                                                        <label htmlFor="email" className="icon-field">
+                                                            <i className="icon-login icon-envelope" />
                                                         </label>
                                                         <input
                                                             required
@@ -106,14 +101,14 @@ function Login(props) {
                                                             name="email"
                                                             placeholder="Email"
                                                             id="recover-email"
-                                                            className={cx('text', 'r-box')}
+                                                            className="text r-box"
                                                         />
                                                     </div>
-                                                    <div className={cx('clearfix', 'login-user')}>
-                                                        <div className={cx('btn-end', 'button', 'dark')}>
-                                                            <input className={cx('btn')} type="submit" value="Gửi" />
+                                                    <div className="clearfix login-user">
+                                                        <div className="btn-end button dark">
+                                                            <input className="btn" type="submit" value="Gửi" />
                                                         </div>
-                                                        <div className={cx('re-pass')}>
+                                                        <div className="re-pass">
                                                             <Link
                                                                 to=""
                                                                 onClick={(event) => {
@@ -129,14 +124,14 @@ function Login(props) {
                                             </div>
                                         </>
                                     ) : (
-                                        <div id="login" className={cx('user-box')}>
-                                            <div className={cx('account-type')}>
-                                                <h2 className={cx('title')}> </h2>
+                                        <div id="login" className="user-box">
+                                            <div className="account-type">
+                                                <h2 className="title"> </h2>
                                             </div>
                                             <form acceptCharset="UTF-8" onSubmit={handleLogin} id="user_login">
-                                                <div className={cx('range-form', 'clearfix')}>
-                                                    <label htmlFor="user_name" className={cx('icon-field')}>
-                                                        <i className={cx('icon-login', 'icon-envelope')} />
+                                                <div className="range-form clearfix">
+                                                    <label htmlFor="user_name" className="icon-field">
+                                                        <i className="icon-login icon-envelope" />
                                                     </label>
                                                     <input
                                                         required
@@ -147,12 +142,12 @@ function Login(props) {
                                                         name="username"
                                                         id="user_name"
                                                         placeholder="Tài Khoản"
-                                                        className={cx('text', 'r-box')}
+                                                        className="text r-box"
                                                     />
                                                 </div>
-                                                <div className={cx('range-form', 'clearfix')}>
-                                                    <label htmlFor="user_password" className={cx('icon-field')}>
-                                                        <i className={cx('icon-login', 'icon-envelope')} />
+                                                <div className="range-form clearfix">
+                                                    <label htmlFor="user_password" className="icon-field">
+                                                        <i className="icon-login icon-envelope" />
                                                     </label>
                                                     <input
                                                         required
@@ -162,25 +157,25 @@ function Login(props) {
                                                         name="userpassword"
                                                         id="user_password"
                                                         placeholder="Mật khẩu"
-                                                        className={cx('text', 'r-box')}
+                                                        className="text r-box"
                                                         size={16}
                                                     />
                                                 </div>
                                                 {errorMessage && (
-                                                    <div className={clsx('alert', 'alert-danger')}>
+                                                    <div className="alert alert-danger">
                                                         <strong>Đăng nhập thất bại</strong>
                                                     </div>
                                                 )}
-                                                <div className={cx('clearfix', 'login-user')}>
-                                                    <div className={cx('btn-end', 'button', 'dark')}>
+                                                <div className="clearfix login-user">
+                                                    <div className="btn-end button dark">
                                                         <input
-                                                            className={cx('btn', 'btn-signin')}
+                                                            className="btn btn-signin"
                                                             type="submit"
                                                             value="Đăng nhập"
                                                         />
                                                     </div>
 
-                                                    <div className={cx('re-pass')}>
+                                                    <div className="re-pass">
                                                         <Link
                                                             to=""
                                                             onClick={(event) => {

@@ -5,12 +5,11 @@ export const login = createAsyncThunk('auth/login', async (credentials, { dispat
     try {
         // Gọi API đăng nhập
         const response = await httpRequest.post('api/login', credentials);
-
-        const { user, accessToken } = response.data;
-
-        dispatch(setCurrentUser(user, accessToken));
-
-        return user;
+        const data = response.data;
+        localStorage.setItem('infoUser', JSON.stringify(data.user));
+        localStorage.setItem('token', JSON.stringify(data.token));
+        dispatch(setCurrentUser({ token: data.token, user: data.user }));
+        return data;
     } catch (error) {
         // In ra lỗi để debug
         console.log(error);
@@ -26,11 +25,8 @@ export const register = createAsyncThunk('auth/register', async (userData, { dis
     try {
         // Gọi API đăng ký
         const response = await httpRequest.post('api/register', userData);
-        // console.log('responseData', response.data);
 
-        const { user, accessToken } = response.data;
-
-        dispatch(setCurrentUser(user, accessToken));
+        const user = response.data;
 
         return user;
     } catch (error) {
@@ -43,17 +39,19 @@ export const register = createAsyncThunk('auth/register', async (userData, { dis
         }
     }
 });
-export const logout = () => {
-    // Xóa token khỏi localStorage
-    localStorage.removeItem('jwtToken');
-    //Xóa token khỏi localStorage
-    localStorage.removeItem('currentUser');
-};
-
-const saveCurrentUser = localStorage.getItem('currentUser');
+export const logout = createAsyncThunk('', (userData, { dispatch }) => {
+    try {
+        localStorage.setItem('infoUser', null);
+        localStorage.setItem('token', '');
+        dispatch(setCurrentUser({ token: '', user: null }));
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 const initialState = {
-    currentUser: saveCurrentUser ? saveCurrentUser : null,
+    currentUser: null,
+    token: '',
     isLoading: false,
     error: null,
 };
@@ -63,39 +61,9 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setCurrentUser: (state, action) => {
-            state.currentUser = action.payload;
-            localStorage.setItem('currentUser', action.payload);
+            state.currentUser = action.payload.user;
+            state.token = action.payload.token;
         },
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(login.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
-            .addCase(login.fulfilled, (state, action) => {
-                state.isLoading = false;
-                // Cập nhật currentUser trong Redux store
-                state.currentUser = action.payload;
-                localStorage.setItem('currentUser', action.payload);
-            })
-            .addCase(login.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.error.message;
-            })
-            .addCase(register.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
-            .addCase(register.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.currentUser = action.payload;
-                localStorage.setItem('currentUser', action.payload);
-            })
-            .addCase(register.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.error.message;
-            });
     },
 });
 

@@ -1,3 +1,4 @@
+import Slides from '~/assets/Images/slides';
 import Button from '~/components/Button/Button';
 
 function AboutHomePage() {
@@ -5,25 +6,24 @@ function AboutHomePage() {
         <section id="about" className="about pt-3 mt-5" data-aos="fade-up">
             <div className="row w-100">
                 <div className="col-lg-7 about-image container-fluid">
-                    <img src="assets/images/abouts/home_aboutus.png" alt="" />
+                    <img src={Slides.aboutHome} alt="" />
                 </div>
                 <div className="col-lg-5 about-content ">
                     <div className="about-title text-center align-items-center mt-5">
                         <Button to="/" className="heading-title">
-                            Love more
+                            THE CONNECTION | SS'23 COLLECTION
                             <span className="line mx-auto" />
                         </Button>
                     </div>
                     <p className="content">
-                        Tình yêu là gì? Là cái ôm siết chặt, cái nắm tay ấm áp hay một nụ hôn khẽ chạm cũng đủ làm tim
-                        bồi hồi thổn thức. Tình yêu dắt ta qua những cung bậc của cảm xúc, có lúc lắng đọng, có lúc lại
-                        cuồng nhiệt đắm say. Trước những bấp bênh trong cuộc đời, tình yêu còn là liều thuốc kì diệu để
-                        chữa lành cho tâm hồn đang còn vết xước. Với 𝐋𝐎𝐕𝐄 𝐌𝐎𝐑𝐄, Eva de Eva tái hiện hình ảnh cô gái đang
-                        khoác lên mình những thiết kế bay bổng và say mê tận hưởng cảm xúc lứa đôi ngọt ngào.
+                        Kỳ nghỉ của chúng ta bắt đầu từ đây... Khép nhẹ đôi mi và rũ bỏ những ồn ào náo nhiệt, thời khắc
+                        ấy mọi giác quan sẽ đánh thức 'retro time', như thể bộ lọc thời gian sẽ đưa chúng ta trở về với
+                        phong cách độc đáo của thập niên 50 - nơi mà sự kết nối giữa xưa và nay, giữa cũ và mới, sẽ tạo
+                        nên một bối cảnh tràn ngập năng lượng vui vẻ và hạnh phúc.
                     </p>
-                    <a href="#" className="see-more">
+                    <Button to="/" seemore>
                         Tìm hiểu thêm
-                    </a>
+                    </Button>
                 </div>
             </div>
         </section>

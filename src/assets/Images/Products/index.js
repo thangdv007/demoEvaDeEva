@@ -1,4 +1,5 @@
 import productImg1 from './product-image1.jpg';
+import productImg2 from './product-image2.jpg';
 import productIndex1 from './pro_index_1.png';
 import productIndex2 from './pro_index_2.png';
 import productIndex3 from './pro_index_3.png';
@@ -10,6 +11,7 @@ import productIndex8 from './pro_index_8.png';
 
 const product = {
     productImg1,
+    productImg2,
     productIndex1,
     productIndex2,
     productIndex3,

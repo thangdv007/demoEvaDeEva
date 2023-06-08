@@ -1,6 +1,3 @@
-import classNames from 'classnames/bind';
-import clsx from 'clsx';
-import styles from '../LoginSignup.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,8 +5,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register, setCurrentUser } from '~/redux/userSlice';
 import Breadcrumb from '~/components/Breadcrumb';
-
-const cx = classNames.bind(styles);
 
 function Signup() {
     const dispatch = useDispatch();
@@ -72,19 +67,19 @@ function Signup() {
 
     return (
         <>
-            <div className={cx('clear-fix')} />
-            <main className={cx('container-fluid')}>
-                <div className={cx('layout-ccount')}>
+            <div className="clear-fix" />
+            <main className="container-fluid">
+                <div className="layout-ccount">
                     <Breadcrumb pageName="account" currentAcc="register" />
-                    <div className={cx('container')}>
-                        <div className={cx('row')}>
-                            <div className={cx('left-page', 'col-md-6', 'col-lg-6', 'col-sm-12')}>
-                                <div className={cx('left', 'clearfix')}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="left-page col-md-6 col-lg-6 col-sm-12">
+                                <div className="left clearfix">
                                     <h1>Tạo Tài Khoản</h1>
                                 </div>
                             </div>
-                            <div className={cx('col-sm-12', 'col-md-6', 'col-lg-6', 'right-page')}>
-                                <div className={cx('user-box')}>
+                            <div className="col-sm-12 col-md-6 col-lg-6 right-page">
+                                <div className="user-box">
                                     <form
                                         acceptCharset="UTF-8"
                                         action=""
@@ -92,7 +87,7 @@ function Signup() {
                                         method=""
                                         onSubmit={handleSignup}
                                     >
-                                        <div id="full_name" className={cx('range-form', 'clearfix', 'fn-from', 'row')}>
+                                        <div id="full_name" className="range-form clearfix fn-from row">
                                             <div className="col-lg-6">
                                                 <input
                                                     required
@@ -102,7 +97,7 @@ function Signup() {
                                                     onChange={handleLastNameChange}
                                                     placeholder="Họ"
                                                     id="last_name"
-                                                    className={cx('text', 'h-box')}
+                                                    className="text h-box"
                                                     size="30"
                                                 />
                                             </div>
@@ -115,13 +110,13 @@ function Signup() {
                                                     onChange={handleFirstNameChange}
                                                     placeholder="Tên"
                                                     id="first_name"
-                                                    className={cx('text', 'h-box')}
+                                                    className="text h-box"
                                                     size="30"
                                                 />
                                             </div>
                                         </div>
-                                        <div id="email" className={cx('range-form', 'clearfix')}>
-                                            <label htmlFor="email" className={cx('icon-field', 'label')}>
+                                        <div id="email" className="range-form clearfix">
+                                            <label htmlFor="email" className="icon-field label">
                                                 <i className="icon-login icon-envelope "></i>
                                             </label>
                                             <input
@@ -133,12 +128,12 @@ function Signup() {
                                                 onChange={handleEmailChange}
                                                 name="user_email"
                                                 id="email"
-                                                className={cx('input-email-register', 'text', 'r-box')}
+                                                className="input-email-register text r-box"
                                                 size="30"
                                             />
                                         </div>
-                                        <div id="phone" className={cx('range-form', 'clearfix')}>
-                                            <label htmlFor="phone" className={cx('icon-field', 'label')}>
+                                        <div id="phone" className="range-form clearfix">
+                                            <label htmlFor="phone" className="icon-field label">
                                                 <i className="icon-login icon-phone "></i>
                                             </label>
                                             <input
@@ -151,12 +146,12 @@ function Signup() {
                                                 placeholder="Số điện thoại"
                                                 title="Số điện thoại phải bắt đầu bằng số 0 và có 10 số"
                                                 id="phone"
-                                                className={cx('text', 'r-box')}
+                                                className="text r-box"
                                                 size="10"
                                             />
                                         </div>
-                                        <div id="user_name" className={cx('range-form', 'clearfix')}>
-                                            <label htmlFor="user_name" className={cx('icon-field', 'label')}>
+                                        <div id="user_name" className="range-form clearfix">
+                                            <label htmlFor="user_name" className="icon-field label">
                                                 <i className="icon-login icon-user "></i>
                                             </label>
                                             <input
@@ -167,12 +162,12 @@ function Signup() {
                                                 placeholder="Tài Khoản"
                                                 onChange={handleNameChange}
                                                 id="user_name"
-                                                className={cx('text', 'r-box')}
+                                                className="text r-box"
                                                 size="30"
                                             />
                                         </div>
-                                        <div id="password" className={cx('range-form', 'clearfix')}>
-                                            <label htmlFor="password" className={cx('icon-field', 'label')}>
+                                        <div id="password" className="range-form clearfix">
+                                            <label htmlFor="password" className="icon-field label">
                                                 <i className="icon-login icon-shield "></i>
                                             </label>
                                             <input
@@ -183,18 +178,18 @@ function Signup() {
                                                 name="userpassword"
                                                 onChange={handlePasswordChange}
                                                 id="password"
-                                                className={cx('password', 'text', 'r-box')}
+                                                className="password text r-box"
                                                 size="30"
                                             />
                                         </div>
-                                        <div className={cx('login-user', 'clearfix')}>
-                                            <div className={cx('btn-end', 'button', 'dark')}>
-                                                <input className={cx('btn')} type="submit" value="Đăng ký" />
+                                        <div className="login-user clearfix">
+                                            <div className="btn-end button dark">
+                                                <input className="btn" type="submit" value="Đăng ký" />
                                             </div>
                                         </div>
                                         <div style={{ paddingTop: '15px' }} id="wrap-social-login-plus"></div>
-                                        <div className={cx('re-pass', 'clearfix')}>
-                                            <Link className={cx('back-home')} to="/">
+                                        <div className="re-pass clearfix">
+                                            <Link className="back-home" to="/">
                                                 <FontAwesomeIcon icon={faLeftLong} /> Quay lại trang chủ
                                             </Link>
                                         </div>

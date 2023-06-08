@@ -1,3 +1,14 @@
+// Định nghĩa biến breakpoint cho các kích thước màn hình
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+
+// Các quy tắc CSS chung
+.logo-main {
+    img {
+        max-width: 190px;
+    }
+}
 a {
     &:hover {
         color: #e29481;
@@ -9,17 +20,12 @@ a {
         text-decoration: none;
         outline: none;
     }
-    &:active {
-        outline: none;
-        font-weight: bold;
-    }
 }
-.padding-lr-0 {
-    padding: 0px;
-}
+
 .fix-position {
     position: static;
 }
+
 .main-header {
     padding: 20px 40px;
     float: left;
@@ -29,15 +35,7 @@ a {
     background-color: #fff;
     z-index: 1000;
 }
-#header.fixed {
-    .main-header {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 5;
-        background: white;
-    }
-}
+
 .scrolled {
     /* Định dạng header khi cuộn */
     position: fixed;
@@ -48,13 +46,13 @@ a {
     transform: translateY(0%);
     transition: transform 0.5s ease;
 }
-//nav
+
+// Nav
 .main-nav {
     ul {
         text-align: center;
     }
 }
-$color_1: #e29481;
 
 .main-menu {
     nav {
@@ -63,14 +61,14 @@ $color_1: #e29481;
                 display: inline-block;
                 margin: 0 15px;
                 position: relative;
-                transition: all 0.6s ease-in-out 0s;
+                transition: all 0.05s ease-in-out 0s;
                 > a {
                     font-size: 14px;
                     text-transform: uppercase;
                     padding: 15px 0;
                     float: left;
                     &:hover {
-                        color: $color_1;
+                        color: #e29481;
                         font-weight: bold;
                     }
                 }
@@ -83,6 +81,12 @@ $color_1: #e29481;
                         visibility: visible;
                         transition-delay: 500ms;
                     }
+                }
+            }
+            > li.active {
+                > a {
+                    font-weight: bold;
+                    color: #e29481;
                 }
             }
         }
@@ -131,6 +135,7 @@ $color_1: #e29481;
             width: 100%;
             font-size: 13px;
             padding: 5px 15px;
+            font-weight: 400;
         }
         &:last-child {
             a {
@@ -155,6 +160,11 @@ $color_1: #e29481;
     visibility: hidden;
     width: 50%;
     z-index: 99;
+    li {
+        a {
+            font-weight: 400;
+        }
+    }
 }
 .itemMegaMenu {
     float: left;
@@ -169,12 +179,7 @@ $color_1: #e29481;
         margin: 10px 0 0 0;
         display: block;
     }
-    a.active {
-        font-weight: bold;
-    }
 }
-
-//nav
 
 .right-header {
     margin: 8px 0 0 0;
@@ -184,10 +189,12 @@ $color_1: #e29481;
         float: right;
     }
 }
+
 .cart {
     margin: 6px 0 0 0;
     position: relative;
 }
+
 .count-cart {
     position: absolute;
     right: 0;
@@ -201,13 +208,16 @@ $color_1: #e29481;
     border-radius: 100%;
     line-height: 18px;
 }
+
 .account {
     margin: 6px 0 0 0;
     padding: 0 20px;
 }
+
 .search {
     position: relative;
 }
+
 .searchI {
     border: 1px solid #f1f1f1;
     padding: 0 10px;
@@ -215,6 +225,7 @@ $color_1: #e29481;
     width: 245px;
     height: 40px;
 }
+
 .search-btn {
     position: absolute;
     right: 5px;
@@ -223,4 +234,53 @@ $color_1: #e29481;
     background-color: transparent;
     width: 25px;
     height: 25px;
+}
+
+// Media queries
+@media (max-width: $breakpoint-small) {
+    // Quy tắc áp dụng cho màn hình nhỏ hơn hoặc bằng 576px
+    .main-menu {
+        nav {
+            > ul {
+                > li {
+                    margin: 0 10px;
+                    > a {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-medium) {
+    // Quy tắc áp dụng cho màn hình nhỏ hơn hoặc bằng 768px
+    .main-menu {
+        nav {
+            > ul {
+                > li {
+                    margin: 0 8px;
+                    > a {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-large) {
+    // Quy tắc áp dụng cho màn hình nhỏ hơn hoặc bằng 992px
+    .main-menu {
+        nav {
+            > ul {
+                > li {
+                    margin: 0 6px;
+                    > a {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+    }
 }

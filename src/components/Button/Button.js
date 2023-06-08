@@ -7,14 +7,15 @@ const cx = classNames.bind(styles);
 function Button({
     to,
     href,
-    primary = false,
-    outline = false,
+    type,
     text = false,
-    rounded = false,
-    disabled = false,
     small = false,
     large = false,
     pay = false,
+    signinup = false,
+    store = false,
+    seemore = false,
+    seemore2 = false,
     children,
     className,
     onClick,
@@ -26,14 +27,14 @@ function Button({
         ...passProps,
     };
 
-    // Remove event listener when btn is disabled
-    if (disabled) {
-        Object.keys(props).forEach((key) => {
-            if (key.startsWith('on') && typeof props[key] === 'function') {
-                delete props[key];
-            }
-        });
-    }
+    // // Remove event listener when btn is disabled
+    // if (disabled) {
+    //     Object.keys(props).forEach((key) => {
+    //         if (key.startsWith('on') && typeof props[key] === 'function') {
+    //             delete props[key];
+    //         }
+    //     });
+    // }
 
     if (to) {
         props.to = to;
@@ -41,15 +42,18 @@ function Button({
     } else if (href) {
         props.href = href;
         Comp = 'a';
+    } else if (type) {
+        props.type = type;
+        Comp = 'input';
     }
 
     const classes = cx('wrapper', {
         [className]: className,
-        primary,
-        outline,
         text,
-        disabled,
-        rounded,
+        seemore,
+        seemore2,
+        signinup,
+        store,
         small,
         large,
         pay,

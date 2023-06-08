@@ -1,0 +1,37 @@
+.wrap-collection-title {
+    margin: 30px 0;
+    float: left;
+    width: 100%;
+}
+.heading-collection > div {
+    padding: 0;
+}
+.titlePageAll {
+    font-size: 29px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0;
+    float: left;
+}
+.menuCollection {
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 0;
+    li {
+        display: inline-block;
+        a {
+            padding: 0px 10px;
+            display: inherit;
+            border-right: 1px solid;
+            margin: 12px 0;
+            line-height: 10px;
+            font-size: 15px;
+        }
+        &:last-child {
+            a {
+                border: none;
+            }
+        }
+    }
+}

@@ -1,6 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Breadcrumb({ pageName, currentAcc }) {
+    const location = useLocation();
+
+    // Lấy title từ đường dẫn hiện tại
+    const getCurrentTitle = () => {
+        const path = decodeURIComponent(location.pathname.substring(1));
+        const parts = path.split('/');
+        const title = parts[parts.length - 1];
+        return title;
+    };
     return (
         <div className="padding-rl-40">
             <div style={{ backgroundColor: '#ededed' }}>
@@ -9,13 +18,14 @@ function Breadcrumb({ pageName, currentAcc }) {
                         <li className="breadcrumb-item">
                             <Link to="/">Trang chủ</Link>
                         </li>
-                        {pageName === 'product' ? (
+                        {pageName === 'category' ? (
                             <>
                                 <li className="breadcrumb-item">
                                     <Link to="">Danh mục sản phẩm</Link>
                                 </li>
+
                                 <li className="breadcrumb-item active" aria-current="page">
-                                    {}
+                                    {getCurrentTitle()}
                                 </li>
                             </>
                         ) : pageName === 'account' ? (

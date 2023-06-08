@@ -59,24 +59,25 @@
         margin-left: 20px;
     }
 }
-.btn-end {
-    .btn {
-        display: inline-block;
-        border-radius: 0;
-        border: none;
-        background: #252a2b;
-        padding: 0 30px;
-        height: 55px;
-        line-height: 55px;
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: 600;
-        transition: opacity 150ms linear, color 150ms linear, background 150ms linear;
-        &:hover {
-            background: #e29481;
-        }
+
+.btn {
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+    font-size: 14px;
+    background: #252a2b;
+    padding: 0 30px;
+    height: 55px;
+    line-height: 55px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: opacity 150ms linear, color 150ms linear, background 150ms linear;
+    &:hover {
+        background: #e29481;
     }
 }
+
 .re-pass {
     color: #959898;
     font-weight: 500;
@@ -123,11 +124,6 @@
 .breadcrumb {
     border-radius: 0;
     margin-bottom: 5px;
-}
-li {
-    &.breadcrumb-item {
-        padding: 8px 12px;
-    }
 }
 .back-home {
     margin-top: 35px;

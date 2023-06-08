@@ -1,5 +1,3 @@
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
 import logo from '~/assets/Images/Logo';
 
 import { useState, useEffect } from 'react';
@@ -7,77 +5,79 @@ import { Link } from 'react-router-dom';
 import productCollection from '~/assets/Images/ProductCollection';
 import { useSelector } from 'react-redux';
 
-const cx = classNames.bind(styles);
-
 function Header() {
     // Lấy thông tin người dùng từ Redux store
     const currentUser = useSelector((state) => state.auth.currentUser);
+
+    //const checkLogin = localStorage.getItem('accessToken');
     const [isScrolled, setIsScrolled] = useState(false);
+    //lấy số lượng sản phẩm trong gior hàng
+    const cartCount = useSelector((state) => state.cart.count);
 
     const navItems = [
         {
             title: 'HÀNG MỚI VỀ',
-            to: '/',
+            id: 1,
         },
         {
             title: 'HÀNG BÁN CHẠY',
-            to: '/',
+            id: 2,
         },
         {
             title: 'SẢN PHẨM',
-            to: '/',
+            id: 3,
             children: [
-                { title: 'Đầm', type: 'image', img: productCollection.dam, to: '/' },
-                { title: 'Áo', type: 'image', img: productCollection.ao, to: '/' },
-                { title: 'Áo sơ mi', type: 'image', img: productCollection.aoSoMi, to: '/' },
-                { title: 'Áo kiểu', type: 'image', img: productCollection.aoKieu, to: '/' },
-                { title: 'Jumpsuit', type: 'image', img: productCollection.jumpSuit, to: '/' },
-                { title: 'Chân váy', type: 'image', img: productCollection.chanVay, to: '/' },
-                { title: 'Quần', type: 'image', img: productCollection.quan, to: '/' },
-                { title: 'Homewear', type: 'image', img: productCollection.homeWear, to: '/' },
+                { title: 'Đầm', type: 'image', img: productCollection.dam, id: 4 },
+                { title: 'Áo', type: 'image', img: productCollection.ao, id: 5 },
+                { title: 'Áo sơ mi', type: 'image', img: productCollection.aoSoMi, id: 6 },
+                { title: 'Áo kiểu', type: 'image', img: productCollection.aoKieu, id: 7 },
+                { title: 'Jumpsuit', type: 'image', img: productCollection.jumpSuit, id: 8 },
+                { title: 'Chân váy', type: 'image', img: productCollection.chanVay, id: 9 },
+                { title: 'Quần', type: 'image', img: productCollection.quan, id: 10 },
+                { title: 'Homewear', type: 'image', img: productCollection.homeWear, id: 11 },
             ],
         },
         {
             title: 'UNIQUE COLLECTION',
-            to: '/',
+            id: 12,
         },
         {
             title: 'BỘ SƯU TẬP',
-            to: '/',
+            id: 13,
         },
         {
             title: 'PHỤ KIỆN',
-            to: '/',
+            id: 14,
             subItems: [
-                { title: 'Túi sách', to: '/' },
-                { title: 'Giày', to: '/' },
-                { title: 'Cài Áo', to: '/' },
+                { title: 'Túi sách', id: 15 },
+                { title: 'Giày', id: 16 },
+                { title: 'Cài Áo', id: 17 },
             ],
         },
         {
             title: 'HOMEWEAR',
-            to: '/',
+            id: 18,
         },
         {
             title: 'ĐỒ LÓT',
-            to: '/',
+            id: 19,
         },
         {
             title: 'LADY ME',
-            to: '/',
+            id: 20,
         },
         {
             title: 'SALE',
-            to: '/',
+            id: 21,
             subItems: [
-                { title: 'Sale 30%', to: '/' },
-                { title: 'Sale 70%', to: '/' },
-                { title: 'Sale 70% Áo Sơ Mi', to: '/' },
-                { title: 'Sale 70% Áo Kiểu', to: '/' },
-                { title: 'Sale 70% Đầm', to: '/' },
-                { title: 'Sale 70% Quần', to: '/' },
-                { title: 'Sale 70% Chân váy', to: '/' },
-                { title: 'Sale 70% Áo Vest, Blazer', to: '/' },
+                { title: 'Sale 30%', id: 22 },
+                { title: 'Sale 70%', id: 23 },
+                { title: 'Sale 70% Áo Sơ Mi', id: 24 },
+                { title: 'Sale 70% Áo Kiểu', id: 25 },
+                { title: 'Sale 70% Đầm', id: 26 },
+                { title: 'Sale 70% Quần', id: 27 },
+                { title: 'Sale 70% Chân váy', id: 28 },
+                { title: 'Sale 70% Áo Vest, Blazer', id: 29 },
             ],
         },
     ];
@@ -100,20 +100,22 @@ function Header() {
         };
     }, []);
 
-    const renderNavItem = (item, index) => {
+    const renderNavItem = (item) => {
         const hasChildren = item.children?.length > 0;
         const listItemClass = hasChildren ? 'hasMegamenu' : '';
+        const decodedPathname = decodeURI(window.location.pathname);
+        const isActive = decodedPathname.toLowerCase().includes(item.title.toLowerCase());
 
         if (hasChildren) {
             return (
-                <li key={index} className={cx('hasMegamenu')}>
-                    <Link to={item.to}>{item.title}</Link>
-                    <div className={cx('subMegaMenu')}>
-                        <div className={cx('innerSubMegaMenu')}>
+                <li key={item.id} className={isActive ? 'active hasMegamenu' : 'hasMegamenu'}>
+                    <Link to={`/${item.title}`}>{item.title}</Link>
+                    <div className="subMegaMenu">
+                        <div className="innerSubMegaMenu">
                             <ul>
-                                {item.children.map((child, index) => (
-                                    <li key={index} className={cx('itemMegaMenu')}>
-                                        <Link to={child.to}>
+                                {item.children.map((child) => (
+                                    <li key={child.id} className="itemMegaMenu">
+                                        <Link to={`/${item.title}/${child.title}`}>
                                             <img src={child.img} alt={child.title} />
                                             <span>{child.title}</span>
                                         </Link>
@@ -126,15 +128,19 @@ function Header() {
             );
         } else {
             return (
-                <li key={index} className={listItemClass}>
-                    <Link to={item.to}>{item.title}</Link>
+                <li key={item.id} className={isActive ? 'active' + listItemClass : listItemClass}>
+                    <Link to={`/${item.title}`}>{item.title}</Link>
                     {item.subItems && (
-                        <ul className={cx('subMenu')}>
-                            {item.subItems.map((child, index) => (
-                                <li key={index}>
-                                    <Link to={child.to}>{child.title}</Link>
-                                </li>
-                            ))}
+                        <ul className="subMenu">
+                            {item.subItems.map((subItem) => {
+                                const submain = subItem.title.split(' ').join('');
+                                console.log(subItem);
+                                return (
+                                    <li key={subItem.id}>
+                                        <Link to={`/${item.title}/${submain}`}>{subItem.title}</Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     )}
                 </li>
@@ -145,39 +151,37 @@ function Header() {
     return (
         <header
             id="header"
-            className={
-                isScrolled ? cx('main-header', 'container-fluid', 'scrolled') : cx('main-header', 'container-fluid')
-            }
+            className={isScrolled ? 'main-header container-fluid scrolled' : 'main-header container-fluid'}
         >
-            <div className={cx('nav-lap', 'row')}>
-                <div className={cx('padding-lr-0', 'col-sm-12', 'col-md-3', 'col-lg-2')}>
+            <div className="nav-lap row">
+                <div className="padding-lr-0 col-sm-12 col-md-3 col-lg-2">
                     <div>
                         <Link to="/" title="Logo">
                             <img src={logo.logo_eva} alt="Eva De Eva" />
                         </Link>
                     </div>
                 </div>
-                <div className={cx('fix-position', 'col-lg-7')}>
-                    <div className={cx('main-menu')}>
-                        <div className={cx('nav')}>
-                            <nav className={cx('main-nav')}>
+                <div className="fix-position col-lg-7">
+                    <div className="main-menu">
+                        <div className="nav">
+                            <nav className="main-nav">
                                 <ul>{navItems.map((item) => renderNavItem(item))}</ul>
                             </nav>
                         </div>
                     </div>
                 </div>
-                <div className={cx('col-sm-12', 'col-md-9', 'col-lg-3')}>
-                    <div className={cx('right-header')}>
-                        <div className={cx('cart')}>
+                <div className="col-sm-12 col-md-9 col-lg-3">
+                    <div className="right-header">
+                        <div className="cart">
                             <span>
                                 <Link to="/cart" title="Giỏ hàng">
                                     <img src={logo.cart} alt="Giỏ hàng" />
-                                    <span className={cx('count-cart')}>0</span>
+                                    <span className="count-cart">{cartCount}</span>
                                 </Link>
                             </span>
                         </div>
-                        <div className={cx('account')}>
-                            {!currentUser || currentUser.length === 0 ? (
+                        <div className="account">
+                            {!currentUser ? (
                                 <>
                                     <Link to="/login" title="Tài khoản">
                                         <img src={logo.account} alt="Tài khoản" />
@@ -191,17 +195,17 @@ function Header() {
                                 </>
                             )}
                         </div>
-                        <div className={cx('search')}>
-                            <form action="" className={cx('search-desktop')}>
+                        <div className="search">
+                            <form action="" className="search-desktop">
                                 <input
                                     type="text"
                                     name="q"
                                     id=""
-                                    className={cx('searchI')}
+                                    className="searchI"
                                     placeholder="Tìm sản phẩm..."
                                     defaultValue=""
                                 />
-                                <button type="submit" className={cx('search-btn')}>
+                                <button type="submit" className="search-btn">
                                     <img src={logo.search} alt="" />
                                 </button>
                             </form>

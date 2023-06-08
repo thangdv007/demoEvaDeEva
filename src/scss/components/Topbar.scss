@@ -9,5 +9,7 @@
     font-size: 14px;
 }
 .inner-topbar a {
-    color: black;
+    &:hover {
+        color: black;
+    }
 }

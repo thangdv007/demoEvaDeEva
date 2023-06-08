@@ -1,0 +1,81 @@
+.filter-custom {
+    float: right;
+    margin: -4px 0 0 0px;
+    font-size: 13px;
+    > span {
+        float: left;
+        margin-right: 0;
+        padding: 10px 0;
+    }
+}
+.group-filter {
+    float: left;
+    margin-left: 30px;
+    position: relative;
+    padding: 10px 0;
+
+    .layered_subtitle {
+        position: relative;
+        cursor: pointer;
+
+        span {
+            float: left;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .icon-control {
+            margin: -2px 0 0 5px;
+            cursor: pointer;
+            color: #b6b6b6;
+        }
+    }
+
+    .layered-content {
+        animation-duration: 0.5s;
+        transition: all 0.5s ease-in-out 0s;
+        position: absolute;
+        top: 38px;
+        left: -30px;
+        border: 1px solid #cbcbcb;
+        min-width: 150px;
+        display: none;
+        padding: 15px;
+        box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        background: white;
+
+        &.open {
+            display: block;
+        }
+
+        ul.check-box-list {
+            li {
+                input[type='checkbox'] {
+                    display: none;
+                }
+
+                label {
+                    display: block;
+                    cursor: pointer;
+                    margin-bottom: 5px;
+
+                    span.button {
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        margin-right: 5px;
+                        padding: 0;
+                        border: 1px solid #ebebeb;
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .layered-content {
+            display: block;
+        }
+    }
+}
