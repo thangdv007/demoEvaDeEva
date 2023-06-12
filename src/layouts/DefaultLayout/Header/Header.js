@@ -1,19 +1,24 @@
 import logo from '~/assets/Images/Logo';
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import productCollection from '~/assets/Images/ProductCollection';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTotalQuantity } from '~/redux/actions/cartActions';
 
 function Header() {
+    const dispatch = useDispatch();
+    const location = useLocation();
     // Lấy thông tin người dùng từ Redux store
-    const currentUser = useSelector((state) => state.auth.currentUser);
-
-    //const checkLogin = localStorage.getItem('accessToken');
+    const currentUser = useSelector((state) => state.user.user.auth);
     const [isScrolled, setIsScrolled] = useState(false);
-    //lấy số lượng sản phẩm trong gior hàng
-    const cartCount = useSelector((state) => state.cart.count);
-
+    const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+    useEffect(() => {
+        const storedTotalQuantity = localStorage.getItem('totalQuantity');
+        if (storedTotalQuantity) {
+            dispatch(setTotalQuantity(JSON.parse(storedTotalQuantity)));
+        }
+    }, [dispatch]);
     const navItems = [
         {
             title: 'HÀNG MỚI VỀ',
@@ -92,7 +97,6 @@ function Header() {
             setIsScrolled(false);
         }
     };
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -100,22 +104,40 @@ function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+
     const renderNavItem = (item) => {
         const hasChildren = item.children?.length > 0;
         const listItemClass = hasChildren ? 'hasMegamenu' : '';
-        const decodedPathname = decodeURI(window.location.pathname);
-        const isActive = decodedPathname.toLowerCase().includes(item.title.toLowerCase());
+        // Giải mã đường dẫn URL trước khi so sánh
+        const decodedPathname = decodeURIComponent(location.pathname);
+
+        const isActive =
+            decodedPathname.includes(`/collections/${item.title}`) ||
+            (decodedPathname === '/pages/campaign' && item.title === 'BỘ SƯU TẬP');
+
+        // Kiểm tra xem có bất kỳ subItem nào đang active hay không
+        const isSubItemActive =
+            item.subItems && item.subItems.some((subItem) => decodedPathname.includes(`/collections/${subItem.title}`));
+
+        const isChildActive =
+            item.children && item.children.some((child) => decodedPathname.includes(`/collections/${child.title}`));
+
+        // isActive sẽ là true nếu isActive của bất kỳ subItem hoặc child nào đang active
+        const isParentActive = isActive || isSubItemActive || isChildActive;
 
         if (hasChildren) {
             return (
-                <li key={item.id} className={isActive ? 'active hasMegamenu' : 'hasMegamenu'}>
-                    <Link to={`/${item.title}`}>{item.title}</Link>
+                <li key={item.id} className={isParentActive ? 'active hasMegamenu' : 'hasMegamenu'}>
+                    <Link to={`/collections/${item.title}`}>{item.title}</Link>
                     <div className="subMegaMenu">
                         <div className="innerSubMegaMenu">
                             <ul>
                                 {item.children.map((child) => (
                                     <li key={child.id} className="itemMegaMenu">
-                                        <Link to={`/${item.title}/${child.title}`}>
+                                        <Link to={`/collections/${child.title}`}>
                                             <img src={child.img} alt={child.title} />
                                             <span>{child.title}</span>
                                         </Link>
@@ -128,16 +150,20 @@ function Header() {
             );
         } else {
             return (
-                <li key={item.id} className={isActive ? 'active' + listItemClass : listItemClass}>
-                    <Link to={`/${item.title}`}>{item.title}</Link>
+                <li key={item.id} className={isParentActive ? 'active' + listItemClass : listItemClass}>
+                    {item.title === 'BỘ SƯU TẬP' ? (
+                        <Link to={'/pages/campaign'}>BỘ SƯU TẬP</Link>
+                    ) : (
+                        <Link to={`/collections/${item.title}`}>{item.title}</Link>
+                    )}
                     {item.subItems && (
                         <ul className="subMenu">
                             {item.subItems.map((subItem) => {
-                                const submain = subItem.title.split(' ').join('');
-                                console.log(subItem);
                                 return (
                                     <li key={subItem.id}>
-                                        <Link to={`/${item.title}/${submain}`}>{subItem.title}</Link>
+                                        <Link to={`/collections/${encodeURIComponent(subItem.title)}`}>
+                                            {subItem.title}
+                                        </Link>
                                     </li>
                                 );
                             })}
@@ -176,12 +202,12 @@ function Header() {
                             <span>
                                 <Link to="/cart" title="Giỏ hàng">
                                     <img src={logo.cart} alt="Giỏ hàng" />
-                                    <span className="count-cart">{cartCount}</span>
+                                    <span className="count-cart">{totalQuantity}</span>
                                 </Link>
                             </span>
                         </div>
                         <div className="account">
-                            {!currentUser ? (
+                            {currentUser === null || currentUser === false ? (
                                 <>
                                     <Link to="/login" title="Tài khoản">
                                         <img src={logo.account} alt="Tài khoản" />

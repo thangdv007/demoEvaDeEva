@@ -16,6 +16,8 @@ function Button({
     store = false,
     seemore = false,
     seemore2 = false,
+    blurred = false,
+    complete = false,
     children,
     className,
     onClick,
@@ -42,10 +44,11 @@ function Button({
     } else if (href) {
         props.href = href;
         Comp = 'a';
-    } else if (type) {
-        props.type = type;
-        Comp = 'input';
     }
+    // else if (type) {
+    //     props.type = type;
+    //     Comp = 'input';
+    // }
 
     const classes = cx('wrapper', {
         [className]: className,
@@ -53,6 +56,8 @@ function Button({
         seemore,
         seemore2,
         signinup,
+        blurred,
+        complete,
         store,
         small,
         large,

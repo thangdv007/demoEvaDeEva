@@ -1,8 +1,8 @@
 import { default as React, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Breadcrumb from '~/components/Breadcrumb';
-import { login, setCurrentUser } from '~/redux/userSlice';
+import { handleLoginRedux } from '~/redux/actions/userAction';
 
 function Login() {
     const dispatch = useDispatch();
@@ -11,7 +11,10 @@ function Login() {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordRecovery, setShowPasswordRecovery] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+
+    const isLoading = useSelector((state) => state.user.isLoading);
+    const isError = useSelector((state) => state.user.isError);
+    const user = useSelector((state) => state.user.user);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -34,23 +37,13 @@ function Login() {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        setErrorMessage('');
-        dispatch(login({ username, password }))
-            .then((result) => {
-                if (!result.error) {
-                    // Đăng nhập thành công, chuyển hướng về trang chủ
-                    navigate('/');
-                    dispatch(setCurrentUser(result.payload)); // Cập nhật currentUser trong Redux store
-                } else {
-                    console.log(errorMessage);
-                    // Có lỗi xảy ra trong quá trình đăng nhập
-                    setErrorMessage(result.error.message);
-                }
-            })
-            .catch((error) => {
-                setErrorMessage(error.message);
-            });
+        dispatch(handleLoginRedux(username, password));
     };
+    useEffect(() => {
+        if (user && user.auth === true) {
+            navigate('/');
+        }
+    }, [user]);
     const handleForgotPass = (e) => {
         e.preventDefault();
     };
@@ -161,13 +154,15 @@ function Login() {
                                                         size={16}
                                                     />
                                                 </div>
-                                                {errorMessage && (
-                                                    <div className="alert alert-danger">
-                                                        <strong>Đăng nhập thất bại</strong>
+                                                {isError && (
+                                                    <div className="text-danger">
+                                                        Đăng nhập thất bại, vui lòng thử lại !
                                                     </div>
                                                 )}
                                                 <div className="clearfix login-user">
                                                     <div className="btn-end button dark">
+                                                        {isLoading && <i className="fas fa-spinner fa-pulse"></i>}
+                                                        &nbsp;
                                                         <input
                                                             className="btn btn-signin"
                                                             type="submit"

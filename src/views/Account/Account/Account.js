@@ -4,19 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Breadcrumb from '~/components/Breadcrumb';
 import Button from '~/components/Button/Button';
-import { logout } from '~/redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { handleLogoutRedux } from '~/redux/actions/userAction';
 
 function Account() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // Sử dụng useSelector để lấy currentUser từ Redux store
-    const currentUser = useSelector((state) => state.auth.currentUser);
-    console.log('currentUser', currentUser);
+    // Sử dụng useSelector để lấy user từ Redux store
+    const user = useSelector((state) => state.user.user.user);
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(handleLogoutRedux());
     };
+    useEffect(() => {
+        if (user && user.auth === false) {
+            navigate('/');
+        }
+    }, [user]);
 
     const listOrder = [
         {
@@ -79,11 +83,11 @@ function Account() {
                                     <p className="title-detail">Thông tin tài khoản</p>
                                     <p>
                                         <FontAwesomeIcon icon={faEnvelope} />
-                                        &nbsp; {currentUser?.email}
+                                        &nbsp; {user?.email}
                                     </p>
                                     <p>
                                         <FontAwesomeIcon icon={faPhone} />
-                                        &nbsp; {currentUser?.phone}
+                                        &nbsp; {user?.phone}
                                     </p>
 
                                     <div>

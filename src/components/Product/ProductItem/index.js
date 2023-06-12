@@ -4,7 +4,7 @@ function ProductItem({ product, swiper }) {
     return (
         <>
             <div className={swiper ? 'product-item' : 'product-item col-sm-6 col-md-4 col-lg-3'}>
-                <Button to="/product">
+                <Button to={`/product-details/${product.id}`}>
                     <div className="image-hover">
                         <img src={product.img1} alt="" className="item-first" />
                         <img src={product.img2} alt="" className="item-second" />

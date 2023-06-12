@@ -1,0 +1,88 @@
+.os-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    .os-header-title {
+        font-size: 1.5em;
+        margin-bottom: 0.1em;
+    }
+    .os-order-number {
+        display: block;
+    }
+    .os-description {
+        color: #4d4d4d;
+    }
+}
+
+.icon.icon-os-question {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.5em;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48cGF0aCBkPSJNOSAxOGM0Ljk3IDAgOS00LjAzIDktOXMtNC4wMy05LTktOS05IDQuMDMtOSA5IDQuMDMgOSA5IDl6TTUuODUgNy4xNjJoMS41NDZjLjA1My0uODAzLjYtMS4zMTcgMS40NS0xLjMxNy44MjggMCAxLjM4LjQ5NCAxLjM4IDEuMTggMCAuNjUtLjI3NSAxLTEuMDkyIDEuNDkzLS45MDguNTM0LTEuMjkgMS4xMjYtMS4yMyAyLjExNGwuMDA2LjQ0OGgxLjUyN3YtLjM3NmMwLS42NS4yNDQtLjk4NyAxLjEwNi0xLjQ5NC44OTYtLjUzNCAxLjM5Ni0xLjIzOCAxLjM5Ni0yLjI0NiAwLTEuNDU1LTEuMjA3LTIuNDk1LTMuMDEtMi40OTUtMS45NTUgMC0zLjAzIDEuMTMtMy4wOCAyLjY5em0yLjg5NiA3LjA1OGMuNjcyIDAgMS4wOTMtLjQxNCAxLjA5My0xLjA0NiAwLS42NC0uNDIzLTEuMDU0LTEuMDk1LTEuMDU0LS42NiAwLTEuMDkzLjQxNS0xLjA5MyAxLjA1NCAwIC42MzIuNDM0IDEuMDQ2IDEuMDkzIDEuMDQ2eiIgZmlsbD0iI0I1QjVCNSIgZmlsbC1ydWxlPSJldmVub2RkIi8+PC9zdmc+),
+        none;
+}
+.hanging-icon {
+    margin-right: 0.75em;
+    stroke: #338dbc;
+}
+.step-footer {
+    .step-footer-info {
+        display: flex;
+        align-items: center;
+    }
+}
+.section {
+    .section-content {
+        .content-box {
+            .content-box-row.content-box-row-no-border {
+                + {
+                    .content-box-row {
+                        border-top: none !important;
+                    }
+                }
+            }
+            .content-box-row.content-box-row-padding {
+                padding: 0.8em 0.6em;
+            }
+            h3 {
+                color: #4d4d4d;
+            }
+        }
+    }
+}
+h3 {
+    &:not(:first-child) {
+        margin-top: 1.5em;
+    }
+}
+
+@media (min-width: 1300px) {
+    .hanging-icon {
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-right: 1.5em;
+    }
+}
+@media (min-width: 750px) {
+    .os-header {
+        margin: 0 0 -0.5em !important;
+    }
+    .section.thank-you-checkout-info {
+        padding-top: 1.5em;
+    }
+    .step-footer-info {
+        flex: 1 1 auto;
+        margin-right: 1em;
+        float: left;
+    }
+}
+@media (max-width: 749px) {
+    .section-header {
+        margin-bottom: 1em;
+    }
+}
+.section.thank-you-checkout-info {
+    padding-top: 0.5em;
+}

@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { register, setCurrentUser } from '~/redux/userSlice';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from '~/components/Breadcrumb';
+import { handleRegisterRedux } from '~/redux/actions/register';
 
 function Signup() {
     const dispatch = useDispatch();
@@ -15,7 +15,8 @@ function Signup() {
     const [firstName, setFirstName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+
+    const user = useSelector((state) => state.register.user);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -39,8 +40,7 @@ function Signup() {
 
     const handleSignup = (event) => {
         event.preventDefault();
-        setErrorMessage('');
-        const user = {
+        const data = {
             username,
             password,
             lastName,
@@ -48,22 +48,13 @@ function Signup() {
             email,
             phone,
         };
-        dispatch(register(user))
-            .then((result) => {
-                if (!result.error) {
-                    // Đăng nhập thành công, chuyển hướng về trang chủ
-                    navigate('/login');
-                    dispatch(setCurrentUser(result.payload)); // Cập nhật currentUser trong Redux store
-                } else {
-                    console.log(errorMessage);
-                    // Có lỗi xảy ra trong quá trình đăng nhập
-                    setErrorMessage(result.error.message);
-                }
-            })
-            .catch((error) => {
-                setErrorMessage(error.message);
-            });
+        dispatch(handleRegisterRedux(data));
     };
+    useEffect(() => {
+        if (user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
 
     return (
         <>

@@ -7,8 +7,9 @@ import ReactPaginate from 'react-paginate';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import HomeBanner from '~/assets/Images/HomeBanner';
 
-function Products() {
+function ProductPage() {
     const [currentPage, setCurrentPage] = useState(0);
     const products = [
         {
@@ -59,6 +60,9 @@ function Products() {
                     </div>
                 </div>
                 <div className="padding-rl-40">
+                    <div className="banner-collection-header">
+                        <img src={HomeBanner.bannerCollection} />
+                    </div>
                     <CollectionTitle />
                     <div className="clear-fix filter-here">
                         <div className="content-product-list clear-fix">
@@ -159,4 +163,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default ProductPage;
